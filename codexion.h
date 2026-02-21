@@ -6,7 +6,7 @@
 /*   By: nai-sfi <nait-sfi@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:09:36 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/21 15:22:28 by nai-sfi          ###   ########.fr       */
+/*   Updated: 2026/02/21 15:51:54 by nai-sfi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 typedef enum e_scheduler
 {
-	SCHED_FIFO,
-	SCHED_EDF
+	COD_SCHED_FIFO,
+	COD_SCHED_EDF
 }	t_scheduler;
 
 typedef struct s_heap_node
