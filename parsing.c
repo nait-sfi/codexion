@@ -34,7 +34,7 @@ static int parce_helper(t_sim *sim, char **argv)
 		return (fprintf(stderr, "Error: invalid dongle_cooldown\n"), 1);
 	sim->dongle_cooldown = (long long)tmp;
 	if (strcmp(argv[8], "fifo") == 0)
-		sim->scheduler = SCHED_FIFO;
+		sim->scheduler = COD_SCHED_FIFO;
 	else if (strcmp(argv[8], "edf") == 0)
 		sim->scheduler = COD_SCHED_EDF;
 	else

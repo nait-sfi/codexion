@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dongle.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nai-sfi <nait-sfi@student.1337.ma>         +#+  +:+       +#+        */
+/*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 15:02:38 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/23 23:23:30 by nai-sfi          ###   ########.fr       */
+/*   Updated: 2026/02/23 23:36:13 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static long long	get_priority(t_coder *coder)
 {
 	long long	priority;
 
-	if (coder->sim->scheduler == COD_SCHED_EDF)
+	if (coder->sim->scheduler == COD_SCHED_FIFO)
 	{
 		pthread_mutex_lock(&coder->sim->counter_mutex);
 		priority = coder->sim->fifo_counter;
