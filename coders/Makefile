@@ -1,6 +1,6 @@
 NAME = codexion
 
-SRC = main.c parsing.c init.c coder.c monitor.c dongle.c heap.c heap_utils.c utils.c clean.c
+SRC = main.c parsing.c init.c coder.c monitor.c dongle.c dongle_utils.c heap.c heap_utils.c utils.c clean.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

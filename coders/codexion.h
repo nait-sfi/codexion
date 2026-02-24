@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nai-sfi <nait-sfi@student.1337.ma>         +#+  +:+       +#+        */
+/*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:09:36 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/22 17:48:35 by nai-sfi          ###   ########.fr       */
+/*   Updated: 2026/02/24 14:00:09 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,38 @@ struct s_sim
 	t_coder			*coders;
 };
 
-int			parse_args(t_sim *sim, int argc, char **argv);
+int				parse_args(t_sim *sim, int argc, char **argv);
 
-void		bubble_down(t_heap *h, int i);
-void		bubble_up(t_heap *h, int i);
-void		swap(t_heap_node *a, t_heap_node *b);
-void		heap_init(t_heap *h, int capacity);
-void		heap_destroy(t_heap *h);
-void		heap_push(t_heap *h, int coder_id, long long priority);
-t_heap_node	heap_pop(t_heap *h);
-int			heap_peek_id(t_heap *h);
-int			heap_is_empty(t_heap *h);
-void		heap_remove_coder(t_heap *h, int coder_id);
+void			bubble_down(t_heap *h, int i);
+void			bubble_up(t_heap *h, int i);
+void			swap(t_heap_node *a, t_heap_node *b);
+void			heap_init(t_heap *h, int capacity);
+void			heap_destroy(t_heap *h);
+void			heap_push(t_heap *h, int coder_id, long long priority);
+t_heap_node		heap_pop(t_heap *h);
+int				heap_peek_id(t_heap *h);
+int				heap_is_empty(t_heap *h);
+void			heap_remove_coder(t_heap *h, int coder_id);
 
-long long	get_time_ms(void);
-void		precise_usleep(long long duration_ms, t_sim *sim);
-void		log_action(t_sim *sim, int coder_id, char *action);
-int			is_running(t_sim *sim);
-void		set_running(t_sim *sim, int value);
+long long		get_time_ms(void);
+void			precise_usleep(long long duration_ms, t_sim *sim);
+void			log_action(t_sim *sim, int coder_id, char *action);
+int				is_running(t_sim *sim);
+void			set_running(t_sim *sim, int value);
 
-int			init_simulation(t_sim *sim);
-void		cleanup(t_sim *sim);
+int				init_simulation(t_sim *sim);
+void			cleanup(t_sim *sim);
 
-int			acquire_dongle(t_coder *coder, int dongle_idx);
-void		release_dongle(t_coder *coder, int dongle_idx);
-void		wake_all_dongles(t_sim *sim);
+long long		get_priority(t_coder *coder);
+struct timespec	make_timespec(long long abs_time_ms);
+int				can_take_dongle(t_dongle *dongle, t_coder *coder);
+long long		compute_wait_timeout(t_dongle *dongle, t_sim *sim);
 
-void		*coder_routine(void *arg);
-void		*monitor_routine(void *arg);
+int				acquire_dongle(t_coder *coder, int dongle_idx);
+void			release_dongle(t_coder *coder, int dongle_idx);
+void			wake_all_dongles(t_sim *sim);
+
+void			*coder_routine(void *arg);
+void			*monitor_routine(void *arg);
 
 #endif

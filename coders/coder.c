@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   coder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nai-sfi <nait-sfi@student.1337.ma>         +#+  +:+       +#+        */
+/*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 23:27:09 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/23 23:27:10 by nai-sfi          ###   ########.fr       */
+/*   Created: 2026/02/23 23:27:09 by nait-sfi          #+#    #+#             */
+/*   Updated: 2026/02/24 13:28:46 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+static int	acquire_dongles(t_coder *coder)
+{
+	if (!acquire_dongle(coder, coder->first_dongle))
+		return (0);
+	log_action(coder->sim, coder->id, "has taken a dongle");
+	if (!acquire_dongle(coder, coder->second_dongle))
+	{
+		release_dongle(coder, coder->first_dongle);
+		return (0);
+	}
+	log_action(coder->sim, coder->id, "has taken a dongle");
+	return (1);
+}
+
+static void	do_compile(t_coder *coder)
+{
+	pthread_mutex_lock(&coder->state_mutex);
+	coder->last_compile_start = get_time_ms();
+	pthread_mutex_unlock(&coder->state_mutex);
+	log_action(coder->sim, coder->id, "is compiling");
+	precise_usleep(coder->sim->time_to_compile, coder->sim);
+	release_dongle(coder, coder->first_dongle);
+	release_dongle(coder, coder->second_dongle);
+	pthread_mutex_lock(&coder->state_mutex);
+	coder->compile_count++;
+	pthread_mutex_unlock(&coder->state_mutex);
+}
 
 void	*coder_routine(void *arg)
 {
@@ -21,25 +49,9 @@ void	*coder_routine(void *arg)
 		usleep(1000);
 	while (is_running(coder->sim))
 	{
-		if (!acquire_dongle(coder, coder->first_dongle))
+		if (!acquire_dongles(coder))
 			break ;
-		log_action(coder->sim, coder->id, "has taken a dongle");
-		if (!acquire_dongle(coder, coder->second_dongle))
-		{
-			release_dongle(coder, coder->first_dongle);
-			break ;
-		}
-		log_action(coder->sim, coder->id, "has taken a dongle");
-		pthread_mutex_lock(&coder->state_mutex);
-		coder->last_compile_start = get_time_ms();
-		pthread_mutex_unlock(&coder->state_mutex);
-		log_action(coder->sim, coder->id, "is compiling");
-		precise_usleep(coder->sim->time_to_compile, coder->sim);
-		release_dongle(coder, coder->first_dongle);
-		release_dongle(coder, coder->second_dongle);
-		pthread_mutex_lock(&coder->state_mutex);
-		coder->compile_count++;
-		pthread_mutex_unlock(&coder->state_mutex);
+		do_compile(coder);
 		if (!is_running(coder->sim))
 			break ;
 		log_action(coder->sim, coder->id, "is debugging");

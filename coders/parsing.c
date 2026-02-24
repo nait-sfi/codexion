@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/24 13:46:47 by nait-sfi          #+#    #+#             */
+/*   Updated: 2026/02/24 13:47:43 by nait-sfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "codexion.h"
 
 static int	ft_atoi_strict(const char *str, int *out)
@@ -26,9 +38,9 @@ static int	ft_atoi_strict(const char *str, int *out)
 	return (1);
 }
 
-static int parce_helper(t_sim *sim, char **argv)
+static int	parce_helper(t_sim *sim, char **argv)
 {
-	int tmp;
+	int	tmp;
 
 	if (!ft_atoi_strict(argv[7], &tmp) || tmp < 0)
 		return (fprintf(stderr, "Error: invalid dongle_cooldown\n"), 1);
@@ -66,7 +78,5 @@ int	parse_args(t_sim *sim, int argc, char **argv)
 	if (!ft_atoi_strict(argv[6], &tmp) || tmp < 1)
 		return (fprintf(stderr, "Error: invalid number_of_compiles\n"), 1);
 	sim->compiles_required = tmp;
-	return parce_helper(sim, argv);
+	return (parce_helper(sim, argv));
 }
-
-

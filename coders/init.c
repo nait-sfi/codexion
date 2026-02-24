@@ -6,20 +6,19 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 21:49:31 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/23 23:32:08 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/02/24 13:26:07 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-static void assign_coder(t_sim * sim, int i)
+static void	assign_coder(t_sim *sim, int i)
 {
-sim->coders[i].id = i + 1;
-sim->coders[i].compile_count = 0;
-sim->coders[i].sim = sim;
-sim->coders[i].left_dongle = i;
-sim->coders[i].right_dongle = (i + 1) % sim->num_coders;
-
+	sim->coders[i].id = i + 1;
+	sim->coders[i].compile_count = 0;
+	sim->coders[i].sim = sim;
+	sim->coders[i].left_dongle = i;
+	sim->coders[i].right_dongle = (i + 1) % sim->num_coders;
 }
 
 static int	init_coders(t_sim *sim)

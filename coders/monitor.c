@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/23 23:27:04 by nait-sfi           #+#    #+#             */
-/*   Updated: 2026/02/23 23:28:07 by nait-sfi         ###   ########.fr       */
+/*   Created: 2026/02/23 23:27:04 by nait-sfi          #+#    #+#             */
+/*   Updated: 2026/02/24 13:26:57 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-
-
 
 static int	check_burnout(t_sim *sim)
 {
