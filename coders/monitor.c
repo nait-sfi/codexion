@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 23:27:04 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/02/24 13:26:57 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/02/25 18:06:11 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	check_burnout(t_sim *sim)
 	int			i;
 	long long	last;
 	long long	now;
+	int			success_compiles;
 
 	now = get_time_ms();
 	i = 0;
@@ -24,8 +25,10 @@ static int	check_burnout(t_sim *sim)
 	{
 		pthread_mutex_lock(&sim->coders[i].state_mutex);
 		last = sim->coders[i].last_compile_start;
+		success_compiles = sim->coders[i].compile_count;
 		pthread_mutex_unlock(&sim->coders[i].state_mutex);
-		if (now - last >= sim->time_to_burnout)
+		if (now - last >= sim->time_to_burnout
+			&& success_compiles < sim->compiles_required)
 			return (sim->coders[i].id);
 		i++;
 	}
