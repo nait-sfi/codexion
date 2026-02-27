@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:09:36 by nai-sfi           #+#    #+#             */
-/*   Updated: 2026/02/24 14:00:09 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:13:02 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_dongle
 	t_sim			*sim;
 }	t_dongle;
 
-struct	s_coder
+struct s_coder
 {
 	int				id;
 	pthread_t		thread;
@@ -68,7 +68,7 @@ struct	s_coder
 	t_sim			*sim;
 };
 
-struct s_sim
+struct	s_sim
 {
 	int				num_coders;
 	long long		time_to_burnout;
