@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 21:49:31 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/03/02 12:22:36 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:44:21 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ static int	init_dongles(t_sim *sim)
 			return (1);
 		if (pthread_cond_init(&sim->dongles[i].cond, NULL) != 0)
 			return (1);
-		heap_init(&sim->dongles[i].queue, sim->num_coders);
+		if (heap_init(&sim->dongles[i].queue, sim->num_coders) != 0)
+			return (1);
+		if (!sim->dongles[i].queue.nodes)
+			return (1);
 		i++;
 	}
 	return (0);

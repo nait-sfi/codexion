@@ -6,22 +6,23 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 15:52:27 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/03/02 12:22:09 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/03 17:44:56 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-void	heap_init(t_heap *h, int capacity)
+int	heap_init(t_heap *h, int capacity)
 {
 	h->nodes = malloc(sizeof(t_heap_node) * capacity);
 	if (!h->nodes)
 	{
 		fprintf(stderr, "Error: heap malloc failed\n");
-		exit(1);
+		return (1);
 	}
 	h->size = 0;
 	h->capacity = capacity;
+	return (0);
 }
 
 void	heap_destroy(t_heap *h)

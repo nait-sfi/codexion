@@ -93,7 +93,7 @@ int				parse_args(t_sim *sim, int argc, char **argv);
 void			bubble_down(t_heap *h, int i);
 void			bubble_up(t_heap *h, int i);
 void			swap(t_heap_node *a, t_heap_node *b);
-void			heap_init(t_heap *h, int capacity);
+int				heap_init(t_heap *h, int capacity);
 void			heap_destroy(t_heap *h);
 void			heap_push(t_heap *h, int coder_id, long long priority);
 t_heap_node		heap_pop(t_heap *h);
