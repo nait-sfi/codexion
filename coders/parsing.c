@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:46:47 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/02/27 15:17:04 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/08 15:09:40 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	parse_helper(t_sim *sim, char **argv)
 {
 	int	tmp;
 
-	if (!ft_atoi_strict(argv[7], &tmp) || tmp < 0)
+	if (!ft_atoi_strict(argv[7], &tmp))
 		return (print_error("Error: invalid dongle_cooldown\n"));
 	sim->dongle_cooldown = (long long)tmp;
 	if (strcmp(argv[8], "fifo") == 0)
@@ -69,16 +69,16 @@ int	parse_args(t_sim *sim, int argc, char **argv)
 	if (!ft_atoi_strict(argv[1], &tmp) || tmp < 1)
 		return (print_error("Error: invalid number_of_coders\n"));
 	sim->num_coders = tmp;
-	if (!ft_atoi_strict(argv[2], &tmp) || tmp <= 0)
+	if (!ft_atoi_strict(argv[2], &tmp) || tmp < 1)
 		return (print_error("Error: invalid time_to_burnout\n"));
 	sim->time_to_burnout = (long long)tmp;
-	if (!ft_atoi_strict(argv[3], &tmp) || tmp <= 0)
+	if (!ft_atoi_strict(argv[3], &tmp) || tmp < 1)
 		return (print_error("Error: invalid time_to_compile\n"));
 	sim->time_to_compile = (long long)tmp;
-	if (!ft_atoi_strict(argv[4], &tmp) || tmp <= 0)
+	if (!ft_atoi_strict(argv[4], &tmp) || tmp < 1)
 		return (print_error("Error: invalid time_to_debug\n"));
 	sim->time_to_debug = (long long)tmp;
-	if (!ft_atoi_strict(argv[5], &tmp) || tmp <= 0)
+	if (!ft_atoi_strict(argv[5], &tmp) || tmp < 1)
 		return (print_error("Error: invalid time_to_refactor\n"));
 	sim->time_to_refactor = (long long)tmp;
 	if (!ft_atoi_strict(argv[6], &tmp) || tmp < 1)

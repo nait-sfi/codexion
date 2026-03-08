@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:53:07 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/03/02 17:19:16 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/08 15:08:09 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ long long	get_priority(t_coder *coder)
 	else
 	{
 		pthread_mutex_lock(&coder->state_mutex);
-		priority = (coder->last_compile_start
-				+ coder->sim->time_to_burnout) * 1000 - coder->id;
+		priority = coder->last_compile_start + coder->sim->time_to_burnout;
 		pthread_mutex_unlock(&coder->state_mutex);
 	}
 	return (priority);

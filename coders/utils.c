@@ -55,10 +55,10 @@ void	log_action(t_sim *sim, int coder_id, char *action)
 	long long	ts;
 	int			running;
 
+	pthread_mutex_lock(&sim->log_mutex);
 	pthread_mutex_lock(&sim->running_mutex);
 	running = sim->running;
 	pthread_mutex_unlock(&sim->running_mutex);
-	pthread_mutex_lock(&sim->log_mutex);
 	if (running || strcmp(action, "burned out") == 0)
 	{
 		ts = get_time_ms() - sim->start_time;
