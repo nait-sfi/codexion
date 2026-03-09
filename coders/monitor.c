@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 23:27:04 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/02/25 18:06:11 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/09 00:22:59 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	*monitor_routine(void *arg)
 		}
 		if (check_completion(sim))
 		{
-			set_running(sim, 0);
+			set_completing(sim, 1);
 			wake_all_dongles(sim);
+			usleep(100000);
+			set_running(sim, 0);
 			return (NULL);
 		}
 	}

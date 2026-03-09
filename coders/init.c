@@ -88,6 +88,7 @@ int	init_simulation(t_sim *sim)
 		return (1);
 	sim->fifo_counter = 0;
 	sim->running = 0;
+	sim->completing = 0;
 	if (init_coders(sim) != 0)
 		return (1);
 	if (init_dongles(sim) != 0)

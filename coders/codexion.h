@@ -80,6 +80,7 @@ struct	s_sim
 	t_scheduler		scheduler;
 	long long		start_time;
 	int				running;
+	int				completing;
 	pthread_mutex_t	running_mutex;
 	pthread_mutex_t	log_mutex;
 	long long		fifo_counter;
@@ -103,9 +104,12 @@ void			heap_remove_coder(t_heap *h, int coder_id);
 
 long long		get_time_ms(void);
 void			precise_usleep(long long duration_ms, t_sim *sim);
+void			precise_usleep_graceful(long long duration_ms, t_sim *sim);
 void			log_action(t_sim *sim, int coder_id, char *action);
 int				is_running(t_sim *sim);
 void			set_running(t_sim *sim, int value);
+int				is_completing(t_sim *sim);
+void			set_completing(t_sim *sim, int value);
 
 int				init_simulation(t_sim *sim);
 void			cleanup(t_sim *sim);

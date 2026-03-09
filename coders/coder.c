@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 23:27:09 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/02/24 13:28:46 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/09 00:30:16 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static void	do_compile(t_coder *coder)
 	pthread_mutex_unlock(&coder->state_mutex);
 }
 
+int	get_my_compiles(t_coder *coder)
+{
+	int	my_compiles;
+
+	pthread_mutex_lock(&coder->state_mutex);
+	my_compiles = coder->compile_count;
+	pthread_mutex_unlock(&coder->state_mutex);
+	return (my_compiles);
+}
+
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
@@ -49,17 +59,21 @@ void	*coder_routine(void *arg)
 		usleep(1000);
 	while (is_running(coder->sim))
 	{
+		if (get_my_compiles(coder) >= coder->sim->compiles_required)
+			break ;
 		if (!acquire_dongles(coder))
 			break ;
 		do_compile(coder);
 		if (!is_running(coder->sim))
 			break ;
 		log_action(coder->sim, coder->id, "is debugging");
-		precise_usleep(coder->sim->time_to_debug, coder->sim);
+		precise_usleep_graceful(coder->sim->time_to_debug, coder->sim);
 		if (!is_running(coder->sim))
 			break ;
 		log_action(coder->sim, coder->id, "is refactoring");
-		precise_usleep(coder->sim->time_to_refactor, coder->sim);
+		precise_usleep_graceful(coder->sim->time_to_refactor, coder->sim);
+		if (is_completing(coder->sim))
+			break ;
 	}
 	return (NULL);
 }
