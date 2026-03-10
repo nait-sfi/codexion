@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 23:27:04 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/03/09 00:22:59 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/10 00:43:54 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*monitor_routine(void *arg)
 		{
 			set_completing(sim, 1);
 			wake_all_dongles(sim);
-			usleep(100000);
+			usleep((sim->time_to_debug + sim->time_to_refactor + 5) * 1000);
 			set_running(sim, 0);
 			return (NULL);
 		}
