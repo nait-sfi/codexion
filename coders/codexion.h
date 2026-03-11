@@ -6,7 +6,7 @@
 /*   By: nait-sfi <nait-sfi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 15:09:36 by nait-sfi          #+#    #+#             */
-/*   Updated: 2026/03/02 12:21:52 by nait-sfi         ###   ########.fr       */
+/*   Updated: 2026/03/11 03:04:46 by nait-sfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void			heap_remove_coder(t_heap *h, int coder_id);
 
 long long		get_time_ms(void);
 void			precise_usleep(long long duration_ms, t_sim *sim);
-void			precise_usleep_graceful(long long duration_ms, t_sim *sim);
 void			log_action(t_sim *sim, int coder_id, char *action);
 int				is_running(t_sim *sim);
 void			set_running(t_sim *sim, int value);
